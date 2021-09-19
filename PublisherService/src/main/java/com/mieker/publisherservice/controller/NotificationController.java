@@ -1,5 +1,6 @@
 package com.mieker.publisherservice.controller;
 
+import com.mieker.publisherservice.model.Notification;
 import com.mieker.publisherservice.model.StudentModel;
 import com.mieker.publisherservice.service.NotificationService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +21,10 @@ public class NotificationController {
     @GetMapping("/{id}")
     public String sendNotification(@PathVariable Long id) {
 
-        return "Powiadomienie zostało wysłane do subskrybenta.";
+        StudentModel studentModel = notificationService.getStudentDataFromStudentService(id);
+        Notification notification = notificationService.createNotification(studentModel);
+        notificationService.sendNotification(notification);
+
+        return "Powiadomienie zostało wysłane do subskrybenta: " + notification.getEmail();
     }
 }

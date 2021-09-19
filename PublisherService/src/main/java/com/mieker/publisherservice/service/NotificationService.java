@@ -23,7 +23,7 @@ public class NotificationService implements Service {
     public StudentModel getStudentDataFromStudentService(Long id) {
 
         StudentModel studentModel = restTemplate
-                .exchange("http://localhost:8090/students/" + id, HttpMethod.GET, HttpEntity.EMPTY, StudentModel.class)
+                .exchange("http://localhost:8090/students/" + id.toString(), HttpMethod.GET, HttpEntity.EMPTY, StudentModel.class)
                 .getBody();
         return studentModel;
     }
@@ -39,6 +39,6 @@ public class NotificationService implements Service {
 
     @Override
     public void sendNotification(Notification notification) {
-        rabbitTemplate.convertAndSend("kurs", notification); 
+        rabbitTemplate.convertAndSend("kurs", notification);
     }
 }
