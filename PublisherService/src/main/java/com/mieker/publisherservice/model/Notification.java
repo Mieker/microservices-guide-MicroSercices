@@ -6,6 +6,13 @@ public class Notification {
     private String title;
     private String body;
 
+    public Notification() {
+    }
+
+    public Notification(String email) {
+        this.email = email;
+    }
+
     public String getEmail() {
         return email;
     }
